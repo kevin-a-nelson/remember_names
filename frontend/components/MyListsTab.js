@@ -11,8 +11,10 @@ export default class PickerTextAndItemStyleExample extends Component {
         };
     }
 
+
+
     componentDidMount() {
-        this.fetchPeople(this.props.groups[0].id)
+        this.props.setSelectedListId(undefined)
     }
 
     fetchPeople(groupId) {
@@ -28,7 +30,6 @@ export default class PickerTextAndItemStyleExample extends Component {
             .catch((error) => {
                 console.error(error);
             });
-
     }
 
     async onValueChange(value) {
@@ -37,6 +38,10 @@ export default class PickerTextAndItemStyleExample extends Component {
     }
 
     people() {
+
+        if (!this.props.selectedListId) {
+            return
+        }
 
         return this.state.people.map(person => (
             <PersonWithRemoveBtn
@@ -51,10 +56,18 @@ export default class PickerTextAndItemStyleExample extends Component {
 
 
     pickerItems() {
-        return this.props.groups.map(group => (
+
+        let pickerItems = this.props.groups.map(group => (
             <Picker.Item label={group.title} value={group.id} key={group.id} />
         ))
+
+        pickerItems.unshift(
+            <Picker.Item label="-- Select a List -- " value={undefined} key={-1} />
+        )
+
+        return pickerItems
     }
+
     render() {
         return (
             <Container>
@@ -85,6 +98,7 @@ export default class PickerTextAndItemStyleExample extends Component {
                         <Grid style={{ width: 180 }}>
                             <Col>
                                 <Button
+                                    disabled={this.props.selectedListId == undefined}
                                     style={{ width: 70, marginTop: 15 }}
                                     onPress={() => this.props.setActiveTab(EDIT_LIST)}
                                 >

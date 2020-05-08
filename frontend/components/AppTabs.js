@@ -48,7 +48,7 @@ export default class MyTabs extends Component {
             .then((responseJson) => {
                 this.setState({
                     groups: responseJson,
-                    selectedListId: responseJson[0].id
+                    // selectedListId: responseJson[0].id
                 })
             })
             .catch((error) => {
