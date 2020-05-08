@@ -1,19 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Content, Item, Input, Text, List, Button, View, ActionSheet, Root } from 'native-base';
+import { Container, Content, Item, Input, Text, List, Button, View, Root } from 'native-base';
 import PersonWithAddBtn from './PersonWithAddBtn'
-import TestComponent from './TestComponent'
-import { TextComponent } from 'react-native';
 
-
-var BUTTONS = [
-    { text: "Option 0", icon: "american-football", iconColor: "#2c8ef4" },
-    { text: "Option 1", icon: "analytics", iconColor: "#f42ced" },
-    { text: "Option 2", icon: "aperture", iconColor: "#ea943b" },
-    // { text: "Delete", icon: "trash", iconColor: "#fa213b" },
-    { text: "Cancel", icon: "close", iconColor: "#25de5b" }
-];
-var DESTRUCTIVE_INDEX = 3;
-var CANCEL_INDEX = 4;
 
 export default class MyLists extends Component {
     constructor(props) {
@@ -54,6 +42,7 @@ export default class MyLists extends Component {
                             <Item regular>
                                 <Input placeholder="Find Someone By Name"
                                     onChangeText={tempSearch => this.setState({ tempSearch })}
+                                    value={this.state.tempSearch}
                                 />
                             </Item>
                             <View style={{ marginTop: 15 }}>

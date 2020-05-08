@@ -6,7 +6,7 @@ const { pool } = require('../config')
 router.get('/', function (request, response) {
     pool.query('SELECT * FROM people_groups', (error, results) => {
         if (error) {
-            throw error
+            return error
         }
         response.status(200).json(results.rows)
     })
@@ -25,7 +25,7 @@ router.post('/', function (request, response) {
 
     pool.query(query, body, error => {
         if (error) {
-            throw error
+            return error
         }
         response.status(201).json({ status: 'success', message: 'People_group added' })
     })

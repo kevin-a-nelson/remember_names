@@ -9,10 +9,6 @@ export default class People extends Component {
         this.state = {}
     }
 
-    componentDidMount() {
-        // console.log(this.props.buttons)
-    }
-
     showActionSheet() {
         ActionSheet.show(
             {

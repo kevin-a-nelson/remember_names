@@ -4,14 +4,14 @@ import { Container, Text, Footer, FooterTab, Button, Icon } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import AppTabs from './components/AppTabs'
-import { FIND_SOMEONE, MY_LISTS } from './globals'
+import { ADD_SOMEONE, MY_LISTS } from './globals'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isReady: false,
-      activeTab: FIND_SOMEONE,
+      activeTab: ADD_SOMEONE,
     };
   }
 
@@ -24,6 +24,11 @@ export default class App extends React.Component {
     this.setState({ isReady: true });
   }
 
+
+  setActiveTab(activeTab) {
+    this.setState({ activeTab })
+  }
+
   render() {
     if (!this.state.isReady) {
       return <AppLoading />;
@@ -34,15 +39,16 @@ export default class App extends React.Component {
         <Container style={{ paddingTop: 40 }}>
           <AppTabs
             activeTab={this.state.activeTab}
+            setActiveTab={this.setActiveTab.bind(this)}
           ></AppTabs>
         </Container>
         <Footer>
           <FooterTab>
-            <Button onPress={() => this.setState({ activeTab: FIND_SOMEONE })} >
+            <Button onPress={() => this.setActiveTab(ADD_SOMEONE)} >
               <Icon name="search" />
               <Text>Add Someone</Text>
             </Button>
-            <Button onPress={() => this.setState({ activeTab: MY_LISTS })} >
+            <Button onPress={() => this.setActiveTab(MY_LISTS)} >
               <Icon name="apps" />
               <Text>My Lists</Text>
             </Button>

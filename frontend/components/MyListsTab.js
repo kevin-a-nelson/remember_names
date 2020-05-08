@@ -1,17 +1,18 @@
 import React, { Component } from "react";
-import { Container, Content, Icon, Picker, Form, View, Button, Text, List } from "native-base";
+import { Container, Content, Icon, Picker, Form, View, Button, Text, List, Grid, Col } from "native-base";
 import PersonWithRemoveBtn from './PersonWithRemoveBtn'
+import { EDIT_LIST, NEW_LIST } from '../globals'
 
 export default class PickerTextAndItemStyleExample extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: undefined,
             people: []
         };
     }
 
     componentDidMount() {
+        this.fetchPeople(this.props.groups[0].id)
     }
 
     fetchPeople(groupId) {
@@ -30,9 +31,8 @@ export default class PickerTextAndItemStyleExample extends Component {
 
     }
 
-    onValueChange(value) {
-        console.log(value)
-        this.setState({ selected: value })
+    async onValueChange(value) {
+        await this.props.setSelectedListId(value)
         this.fetchPeople(value)
     }
 
@@ -42,7 +42,7 @@ export default class PickerTextAndItemStyleExample extends Component {
             <PersonWithRemoveBtn
                 person={person}
                 key={person.id}
-                groupId={this.state.selected}
+                groupId={this.props.selectedListId}
                 fetchPeople={this.fetchPeople.bind(this)}
             >
             </PersonWithRemoveBtn>
@@ -75,16 +75,32 @@ export default class PickerTextAndItemStyleExample extends Component {
                                     }}
                                     itemTextStyle={{ color: '#788ad2' }}
                                     style={{ width: undefined }}
-                                    selectedValue={this.state.selected}
+                                    selectedValue={this.props.selectedListId}
                                     onValueChange={this.onValueChange.bind(this)}
                                 >
                                     {this.pickerItems()}
                                 </Picker>
                             </Form>
                         </View>
-                        <Button style={{ width: 115, marginTop: 15 }}>
-                            <Text>Edit Lists</Text>
-                        </Button>
+                        <Grid style={{ width: 180 }}>
+                            <Col>
+                                <Button
+                                    style={{ width: 70, marginTop: 15 }}
+                                    onPress={() => this.props.setActiveTab(EDIT_LIST)}
+                                >
+                                    <Text>Edit</Text>
+                                </Button>
+                            </Col>
+                            <Col>
+                                <Button
+                                    success
+                                    style={{ width: 70, marginTop: 15 }}
+                                    onPress={() => this.props.setActiveTab(NEW_LIST)}
+                                >
+                                    <Text>New</Text>
+                                </Button>
+                            </Col>
+                        </Grid>
                     </View>
                     <List>
                         {this.people()}

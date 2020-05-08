@@ -8,10 +8,6 @@ export default class People extends Component {
         this.state = {}
     }
 
-    componentDidMount() {
-        // console.log(this.props.buttons)
-    }
-
     async removePersonFromList() {
         await deleteData("http://10.42.214.208:3000/people-groups", {
             person_id: this.props.person.id,

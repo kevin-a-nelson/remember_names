@@ -9,10 +9,6 @@ export default class PersonWithAddBtn extends Component {
         this.state = {}
     }
 
-    componentDidMount() {
-        // console.log(this.props.buttons)
-    }
-
     showActionSheet() {
         ActionSheet.show(
             {
