@@ -21,7 +21,7 @@ export default class MyLists extends Component {
             return []
         }
 
-        const filteredPeople = this.props.people.filter(person => person.title.includes(this.state.search))
+        const filteredPeople = this.props.people.filter(person => person.title.toLowerCase().includes(this.state.search.toLowerCase()))
 
         return filteredPeople.map(person => (
             <PersonWithAddBtn

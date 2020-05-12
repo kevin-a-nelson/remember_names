@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, Button, View, Container, Item, Content, Input, Grid, Col } from 'native-base'
 
-import { MY_LISTS } from '../globals'
+import { MY_LISTS, BASE_URL } from '../globals'
 
 import { postData } from '../services'
 
@@ -14,7 +14,7 @@ export default class NewList extends Component {
     }
 
     async onEnter() {
-        await postData(`http://10.42.214.208:3000/groups`, {
+        await postData(`${BASE_URL}/groups`, {
             user_id: 10,
             title: this.state.newListTitle
         })
@@ -34,9 +34,9 @@ export default class NewList extends Component {
                             />
                         </Item>
                         <Button
-                            style={{ width: 85, marginTop: 15 }}
+                            style={{ width: 91, marginTop: 15 }}
                             onPress={this.onEnter.bind(this)}>
-                            <Text>Enter</Text>
+                            <Text>  Save</Text>
                         </Button>
                         <Button
                             warning

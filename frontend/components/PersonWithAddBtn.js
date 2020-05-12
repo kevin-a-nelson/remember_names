@@ -3,6 +3,8 @@ import { ListItem, Thumbnail, Text, Left, Body, Right, Button, ActionSheet } fro
 
 import { postData } from '../services'
 
+import { BASE_URL } from '../globals'
+
 export default class PersonWithAddBtn extends Component {
     constructor(props) {
         super(props);
@@ -19,7 +21,7 @@ export default class PersonWithAddBtn extends Component {
             buttonIndex => {
                 const person_id = this.props.person.id
                 const group_id = this.props.buttons[buttonIndex].id
-                postData(`http://10.42.214.208:3000/people-groups`, { person_id, group_id })
+                postData(`${BASE_URL}/people-groups`, { person_id, group_id })
             }
         )
     }

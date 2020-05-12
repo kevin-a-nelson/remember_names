@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text } from 'native-base';
 import Person from './PersonWithRemoveBtn'
 import MyListsTab from './MyListsTab'
-import { ADD_SOMEONE, MY_LISTS, EDIT_LIST, NEW_LIST } from '../globals'
+import { ADD_SOMEONE, MY_LISTS, EDIT_LIST, NEW_LIST, BASE_URL } from '../globals'
 import AddSomeoneTab from './AddSomeoneTab'
 import EditList from './EditList'
 import NewList from './NewList'
@@ -25,8 +25,7 @@ export default class MyTabs extends Component {
 
 
     fetchPeople() {
-        this._isMounted = true;
-        fetch('http://10.42.214.208:3000/people', {
+        fetch(`${BASE_URL}/people`, {
             method: 'GET'
         })
             .then((response) => response.json())
@@ -41,7 +40,7 @@ export default class MyTabs extends Component {
     }
 
     fetchGroups() {
-        fetch('http://10.42.214.208:3000/groups', {
+        fetch(`${BASE_URL}/groups`, {
             method: 'GET'
         })
             .then((response) => response.json())

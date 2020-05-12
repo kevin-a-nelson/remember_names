@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ListItem, Thumbnail, Text, Left, Body, Right, Button, ActionSheet } from 'native-base';
-
+import { BASE_URL } from '../globals'
 import { postData } from '../services'
 
 export default class People extends Component {
@@ -19,7 +19,7 @@ export default class People extends Component {
             buttonIndex => {
                 const person_id = this.props.person.id
                 const group_id = this.props.buttons[buttonIndex].id
-                postData(`http://10.42.214.208:3000/people-groups`, { person_id, group_id })
+                postData(`${BASE_URL}/people-groups`, { person_id, group_id })
             }
         )
     }

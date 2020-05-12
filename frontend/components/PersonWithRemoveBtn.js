@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { ListItem, Thumbnail, Text, Left, Body, Right, Button, ActionSheet } from 'native-base';
 import { deleteData } from '../services'
 
+import { BASE_URL } from '../globals'
+
 export default class People extends Component {
     constructor(props) {
         super(props);
@@ -9,7 +11,7 @@ export default class People extends Component {
     }
 
     async removePersonFromList() {
-        await deleteData("http://10.42.214.208:3000/people-groups", {
+        await deleteData(`${BASE_URL}/people-groups`, {
             person_id: this.props.person.id,
             group_id: this.props.groupId
         })

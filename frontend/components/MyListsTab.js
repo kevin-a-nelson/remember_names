@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container, Content, Icon, Picker, Form, View, Button, Text, List, Grid, Col } from "native-base";
 import PersonWithRemoveBtn from './PersonWithRemoveBtn'
-import { EDIT_LIST, NEW_LIST } from '../globals'
+import { EDIT_LIST, NEW_LIST, BASE_URL } from '../globals'
 
 export default class PickerTextAndItemStyleExample extends Component {
     constructor(props) {
@@ -11,14 +11,12 @@ export default class PickerTextAndItemStyleExample extends Component {
         };
     }
 
-
-
     componentDidMount() {
         this.props.setSelectedListId(undefined)
     }
 
     fetchPeople(groupId) {
-        fetch(`http://10.42.214.208:3000/groups/${groupId}/people`, {
+        fetch(`${BASE_URL}/groups/${groupId}/people`, {
             method: 'GET'
         })
             .then((response) => response.json())
@@ -108,7 +106,7 @@ export default class PickerTextAndItemStyleExample extends Component {
                             <Col>
                                 <Button
                                     success
-                                    style={{ width: 70, marginTop: 15 }}
+                                    style={{ width: 68, marginTop: 15 }}
                                     onPress={() => this.props.setActiveTab(NEW_LIST)}
                                 >
                                     <Text>New</Text>

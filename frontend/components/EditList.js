@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, Button, View, Container, Item, Content, Input, Grid, Col } from 'native-base'
 
-import { MY_LISTS } from '../globals'
+import { MY_LISTS, BASE_URL } from '../globals'
 
 import { putData, deleteData } from '../services'
 
@@ -14,7 +14,7 @@ export default class EditList extends Component {
     }
 
     async onEnter() {
-        await putData(`http://10.42.214.208:3000/groups/${this.props.list.id}`, {
+        await putData(`${BASE_URL}/groups/${this.props.list.id}`, {
             user_id: 10,
             title: this.state.newListTitle
         })
@@ -23,7 +23,7 @@ export default class EditList extends Component {
     }
 
     async onDelete() {
-        await deleteData(`http://10.42.214.208:3000/groups/${this.props.list.id}`)
+        await deleteData(`${BASE_URL}/groups/${this.props.list.id}`)
         await this.props.fetchGroups()
         this.props.setActiveTab(MY_LISTS)
     }
@@ -42,9 +42,9 @@ export default class EditList extends Component {
                             />
                         </Item>
                         <Button
-                            style={{ width: 85, marginTop: 15 }}
+                            style={{ width: 91, marginTop: 15 }}
                             onPress={this.onEnter.bind(this)}>
-                            <Text>Enter</Text>
+                            <Text>  Save</Text>
                         </Button>
                         <Button
                             warning
@@ -54,7 +54,7 @@ export default class EditList extends Component {
                         </Button>
                         <Button
                             danger
-                            style={{ width: 90, marginTop: 15 }}
+                            style={{ width: 91, marginTop: 15 }}
                             onPress={this.onDelete.bind(this)}>
                             <Text>DELETE</Text>
                         </Button>
