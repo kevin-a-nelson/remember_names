@@ -4,7 +4,9 @@ import { Container, Text, Footer, FooterTab, Button, Icon } from 'native-base';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 import AppTabs from './components/AppTabs'
-import { ADD_SOMEONE, MY_LISTS } from './globals'
+import { ADD_SOMEONE, MY_LISTS, SIGN_IN } from './globals'
+
+import Signin from './components/Signin'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -32,6 +34,10 @@ export default class App extends React.Component {
   render() {
     if (!this.state.isReady) {
       return <AppLoading />;
+    }
+
+    if (true) {
+      return <Signin />;
     }
 
     return (

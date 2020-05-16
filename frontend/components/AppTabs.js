@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Text } from 'native-base';
 import Person from './PersonWithRemoveBtn'
 import MyListsTab from './MyListsTab'
-import { ADD_SOMEONE, MY_LISTS, EDIT_LIST, NEW_LIST, BASE_URL } from '../globals'
+import { ADD_SOMEONE, MY_LISTS, EDIT_LIST, NEW_LIST, BASE_URL, SIGN_IN } from '../globals'
 import AddSomeoneTab from './AddSomeoneTab'
 import EditList from './EditList'
 import NewList from './NewList'
+import Signin from './Signin'
 
 import { getData } from '../services'
 
@@ -87,6 +88,10 @@ export default class MyTabs extends Component {
         ))
 
         switch (this.props.activeTab) {
+
+            case SIGN_IN: return (
+                <Text>Hello WOrld</Text>
+            )
 
             case ADD_SOMEONE: return (
                 <AddSomeoneTab
