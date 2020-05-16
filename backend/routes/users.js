@@ -36,8 +36,8 @@ router.post('/', function (request, response) {
   const { title } = request.body
 
   const query = `
-      INSERT INTO users (title)
-      VALUES ($1)
+      INSERT INTO users (title, google_id)
+      VALUES ($1, $2)
   `
 
   const body = [title]

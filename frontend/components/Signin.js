@@ -21,6 +21,8 @@ export default class Signin extends Component {
                 scopes: ['profile', 'email'],
             });
 
+            console.log(result.user)
+
             if (result.type === 'success') {
                 this.setState({
                     signedin: true,

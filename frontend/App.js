@@ -36,7 +36,7 @@ export default class App extends React.Component {
       return <AppLoading />;
     }
 
-    if (true) {
+    if (false) {
       return <Signin />;
     }
 

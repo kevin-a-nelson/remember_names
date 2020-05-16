@@ -35,6 +35,15 @@ export default class PickerTextAndItemStyleExample extends Component {
         this.fetchPeople(value)
     }
 
+    removePerson(inputPerson) {
+        const newPeople = this.state.people.filter(person => person.id != inputPerson.id)
+        this.setPeople(newPeople)
+    }
+
+    setPeople(people) {
+        this.setState({ people })
+    }
+
     people() {
 
         if (!this.props.selectedListId) {
@@ -43,6 +52,8 @@ export default class PickerTextAndItemStyleExample extends Component {
 
         return this.state.people.map(person => (
             <PersonWithRemoveBtn
+                setPeople={this.setPeople.bind(this)}
+                removePerson={this.removePerson.bind(this)}
                 person={person}
                 key={person.id}
                 groupId={this.props.selectedListId}

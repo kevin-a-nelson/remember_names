@@ -15,7 +15,7 @@ export default class People extends Component {
             person_id: this.props.person.id,
             group_id: this.props.groupId
         })
-        this.props.fetchPeople(this.props.groupId)
+        this.props.removePerson(this.props.person)
     }
 
     render() {
