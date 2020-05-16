@@ -14,6 +14,8 @@ export default class App extends React.Component {
     this.state = {
       isReady: false,
       activeTab: ADD_SOMEONE,
+      signedin: false,
+      userId: -1,
     };
   }
 
@@ -31,17 +33,29 @@ export default class App extends React.Component {
     this.setState({ activeTab })
   }
 
+  setSignedin(signedin) {
+    this.setState({ signedin })
+  }
+
+  setUserId(userId) {
+    this.setState({ userId })
+  }
+
   render() {
     if (!this.state.isReady) {
       return <AppLoading />;
     }
 
-    if (false) {
-      return <Signin />;
+    if (!this.state.signedin) {
+      return <Signin
+        setSignedin={this.setSignedin.bind(this)}
+        setUserId={this.setUserId.bind(this)}
+      />;
     }
 
     return (
       <Container>
+        <Text>{this.state.userId}</Text>
         <Container style={{ paddingTop: 40 }}>
           <AppTabs
             activeTab={this.state.activeTab}

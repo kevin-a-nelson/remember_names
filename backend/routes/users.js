@@ -6,11 +6,36 @@ const { pool } = require('../config')
 router.get('/', function (request, response) {
   pool.query('SELECT * FROM users', (error, results) => {
     if (error) {
-      throw error
+      return response.status(404).json({ error: error.detail })
     }
     response.status(200).json(results.rows)
   })
 });
+
+router.get('/google_id/:id', function (request, response) {
+  const { id } = request.params
+
+  const query = `
+      SELECT * 
+      FROM users
+      WHERE google_id = $1
+  `
+  const body = [id]
+
+  pool.query(query, body, (error, results) => {
+
+    if (error) {
+      return response.status(404).json({ error: error.detail })
+    }
+
+    if (results.rows.length == 0) {
+      return response.status(404).json({ error: "User not found" })
+    }
+
+    response.status(202).json(results.rows[0])
+  })
+
+})
 
 router.get('/:id', function (request, response) {
 
@@ -25,7 +50,7 @@ router.get('/:id', function (request, response) {
 
   pool.query(query, body, (error, results) => {
     if (error) {
-      throw error
+      return response.status(404).json({ error: error.detail })
     }
     response.status(202).json(results.rows[0])
   })
@@ -33,18 +58,19 @@ router.get('/:id', function (request, response) {
 
 router.post('/', function (request, response) {
 
-  const { title } = request.body
+  const { title, google_id } = request.body
 
   const query = `
       INSERT INTO users (title, google_id)
       VALUES ($1, $2)
   `
 
-  const body = [title]
+  const body = [title, google_id]
 
-  pool.query(query, body, error => {
+  pool.query(query, body, (error, results) => {
     if (error) {
-      throw error
+      console.log(error)
+      return response.status(404).json({ error: error.detail })
     }
     response.status(201).json({ status: 'success', message: 'User added' })
   })
@@ -65,7 +91,7 @@ router.put('/:id', function (request, response) {
 
   pool.query(query, body, error => {
     if (error) {
-      return error
+      return response.status(404).json({ error: error.detail })
     }
     response.status(204).json({ status: 'success', message: 'User updated' })
   })
@@ -83,7 +109,7 @@ router.delete('/:id', function (request, response) {
 
   pool.query(query, body, error => {
     if (error) {
-      return error
+      return response.status(404).json({ error: error.detail })
     }
 
     response.status(202).json({ status: 'success', message: 'User deleted' })

@@ -52,12 +52,10 @@ export default class PickerTextAndItemStyleExample extends Component {
 
         return this.state.people.map(person => (
             <PersonWithRemoveBtn
-                setPeople={this.setPeople.bind(this)}
                 removePerson={this.removePerson.bind(this)}
                 person={person}
                 key={person.id}
                 groupId={this.props.selectedListId}
-                fetchPeople={this.fetchPeople.bind(this)}
             >
             </PersonWithRemoveBtn>
         ))
