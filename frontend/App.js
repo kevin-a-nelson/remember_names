@@ -55,7 +55,6 @@ export default class App extends React.Component {
 
     return (
       <Container>
-        <Text>{this.state.userId}</Text>
         <Container style={{ paddingTop: 40 }}>
           <AppTabs
             activeTab={this.state.activeTab}
