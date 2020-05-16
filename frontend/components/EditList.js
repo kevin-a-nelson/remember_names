@@ -15,7 +15,7 @@ export default class EditList extends Component {
 
     async onEnter() {
         await putData(`${BASE_URL}/groups/${this.props.list.id}`, {
-            user_id: 10,
+            user_id: this.props.userId,
             title: this.state.newListTitle
         })
         await this.props.fetchGroups()

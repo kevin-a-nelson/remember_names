@@ -60,6 +60,7 @@ export default class App extends React.Component {
           <AppTabs
             activeTab={this.state.activeTab}
             setActiveTab={this.setActiveTab.bind(this)}
+            userId={this.state.userId}
           ></AppTabs>
         </Container>
         <Footer>

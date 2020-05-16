@@ -41,11 +41,13 @@ export default class MyTabs extends Component {
     }
 
     fetchGroups() {
-        fetch(`${BASE_URL}/groups`, {
+        fetch(`${BASE_URL}/groups/user-id/${this.props.userId}`, {
             method: 'GET'
         })
             .then((response) => response.json())
             .then((responseJson) => {
+                console.log(`${BASE_URL}/groups/user-id/${this.props.userId}`)
+                console.log(responseJson)
                 this.setState({
                     groups: responseJson,
                     // selectedListId: responseJson[0].id
@@ -113,6 +115,7 @@ export default class MyTabs extends Component {
                 <EditList
                     setActiveTab={this.props.setActiveTab.bind(this)}
                     list={list[0]}
+                    userId={this.props.userId}
                     fetchGroups={this.fetchGroups.bind(this)}
                 />
             )
@@ -121,6 +124,7 @@ export default class MyTabs extends Component {
                 <NewList
                     setActiveTab={this.props.setActiveTab.bind(this)}
                     fetchGroups={this.fetchGroups.bind(this)}
+                    userId={this.props.userId}
                 />
             )
         }

@@ -23,30 +23,25 @@ export default class Signin extends Component {
             scopes: ['profile', 'email'],
         });
 
-        console.log("1")
 
         if (result.type === 'success') {
-            this.props.setSignedin(true)
+
             let user = await getData(`${BASE_URL}/users/google_id/${result.user.id}`)
-            console.log(user)
-            console.log("User", user)
             if (!user.id) {
                 const data = {
                     title: result.user.name,
                     google_id: result.user.id
                 }
-                console.log(data)
+
                 await postData(`${BASE_URL}/users`, data)
                 user = await getData(`${BASE_URL}/users/google_id/${result.user.id}`)
             }
-            this.props.setUserId(user.id)
+            await this.props.setUserId(user.id)
+            this.props.setSignedin(true)
             return result.accessToken;
         } else {
             console.log('cancelled')
         }
-        // } catch (e) {
-        //     console.log('error')
-        // }
     }
 
     render() {

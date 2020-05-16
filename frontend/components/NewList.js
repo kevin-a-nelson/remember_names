@@ -15,7 +15,7 @@ export default class NewList extends Component {
 
     async onEnter() {
         await postData(`${BASE_URL}/groups`, {
-            user_id: 10,
+            user_id: this.props.userId,
             title: this.state.newListTitle
         })
         await this.props.fetchGroups()

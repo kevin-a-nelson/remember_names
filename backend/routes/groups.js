@@ -12,6 +12,28 @@ router.get('/', function (request, response) {
     })
 });
 
+/* GET users listing. */
+router.get('/user-id/:id', function (request, response) {
+
+    const { id } = request.params
+
+    const query = `
+        SELECT *
+        FROM groups
+        WHERE user_id = $1
+    `
+
+    const body = [id]
+
+    pool.query(query, body, (error, results) => {
+        if (error) {
+            return error
+        }
+        response.status(200).json(results.rows)
+    })
+});
+
+
 router.get('/:id/people', function (request, response) {
 
     const { id } = request.params
