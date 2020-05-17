@@ -9,7 +9,7 @@ export default class EditListsTab extends Component {
     }
 
     lists() {
-        console.log(this.props.groups)
+
         return this.props.groups.map(group => {
             return (
                 <EditList

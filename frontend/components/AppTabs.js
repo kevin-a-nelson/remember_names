@@ -46,8 +46,7 @@ export default class MyTabs extends Component {
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log(`${BASE_URL}/groups/user-id/${this.props.userId}`)
-                console.log(responseJson)
+
                 this.setState({
                     groups: responseJson,
                     // selectedListId: responseJson[0].id
@@ -65,11 +64,15 @@ export default class MyTabs extends Component {
 
     buttons() {
 
-        let buttons = this.state.groups.map(group => {
-            return {
-                text: group.title, id: group.id
-            }
-        })
+        let buttons = []
+
+        if (this.state.groups.length >= 1) {
+            buttons = this.state.groups.map(group => {
+                return {
+                    text: group.title, id: group.id
+                }
+            })
+        }
 
         buttons.push({
             text: "Cancel", icon: "close", iconColor: "#25de5b"
@@ -85,9 +88,13 @@ export default class MyTabs extends Component {
 
     render() {
 
-        const list = this.state.groups.filter(group => (
-            group.id == this.state.selectedListId
-        ))
+        let list = []
+        if (this.state.groups.length >= 1) {
+
+            list = this.state.groups.filter(group => (
+                group.id == this.state.selectedListId
+            ))
+        }
 
         switch (this.props.activeTab) {
 

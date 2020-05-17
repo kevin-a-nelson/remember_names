@@ -63,10 +63,13 @@ export default class PickerTextAndItemStyleExample extends Component {
 
 
     pickerItems() {
+        let pickerItems = []
 
-        let pickerItems = this.props.groups.map(group => (
-            <Picker.Item label={group.title} value={group.id} key={group.id} />
-        ))
+        if (this.props.groups.length >= 1) {
+            pickerItems = this.props.groups.map(group => (
+                <Picker.Item label={group.title} value={group.id} key={group.id} />
+            ))
+        }
 
         pickerItems.unshift(
             <Picker.Item label="-- Select a List -- " value={undefined} key={-1} />

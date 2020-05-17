@@ -6,12 +6,13 @@ const { pool } = require('../config')
 router.get('/', function (request, response) {
 
     const query = `
-        SELECT * FROM people
+        SELECT * FROM people;
     `
 
     pool.query(query, (error, results) => {
         if (error) {
             throw error
+            // return response.status(404).json({ error: error.detail })
         }
         response.status(200).json(results.rows)
     })
@@ -29,7 +30,7 @@ router.get('/:id', function (request, response) {
 
     pool.query(query, body, (error, results) => {
         if (error) {
-            throw error
+            return response.status(404).json({ error: error.detail })
         }
         response.status(200).json(results.rows[0])
     })
@@ -55,7 +56,7 @@ router.post('/', function (request, response) {
 
     pool.query(query, body, error => {
         if (error) {
-            throw error
+            return response.status(404).json({ error: error.detail })
         }
         response.status(201).json({ status: 'success', message: 'Person added' })
     })
@@ -85,7 +86,7 @@ router.put('/:id', function (request, response) {
 
     pool.query(query, body, error => {
         if (error) {
-            throw error
+            return response.status(404).json({ error: error.detail })
         }
         response.status(204).json({ status: 'success', message: 'Person updated' })
     })
@@ -102,7 +103,7 @@ router.delete('/:id', function (request, response) {
     const body = [id]
     pool.query(query, body, error => {
         if (error) {
-            throw error
+            return response.status(404).json({ error: error.detail })
         }
         response.status(202).json({ status: 'success', message: 'Person deleted' })
     })
