@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, Button, View, Container } from "native-base"
+import { Text, Button, View, Container, Icon } from "native-base"
 import * as Google from 'expo-google-app-auth';
 import Expo from 'expo'
 import { androidClientId } from '../keys'
@@ -47,9 +47,12 @@ export default class Signin extends Component {
     render() {
         return (
             <Container style={{ marginTop: 50 }}>
-                <Button onPress={this.signInWithGoogleAsync.bind(this)}>
-                    <Text>Sign in with Google</Text>
-                </Button>
+                <View style={{ marginVertical: 0, justifyContent: 'center', alignItems: 'center' }}>
+                    <Button onPress={this.signInWithGoogleAsync.bind(this)} iconLeft style={{ width: 250, paddingRight: 10 }}>
+                        <Icon name='logo-google' />
+                        <Text>Sign in with Google</Text>
+                    </Button>
+                </View>
             </Container>
         )
     }
