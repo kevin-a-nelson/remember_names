@@ -3,7 +3,7 @@ import { ListItem, Thumbnail, Text, Left, Body, Right, Button, ActionSheet } fro
 
 import { postData } from '../services'
 
-import { BASE_URL } from '../globals'
+import { BASE_URL, PERSON_DETAIL } from '../globals'
 
 export default class PersonWithAddBtn extends Component {
     constructor(props) {
@@ -27,9 +27,9 @@ export default class PersonWithAddBtn extends Component {
     }
 
     render() {
-
         const { person } = this.props
         return (
+
             <ListItem thumbnail>
                 <Left>
                     <Thumbnail
@@ -48,6 +48,7 @@ export default class PersonWithAddBtn extends Component {
                     </Text>
                 </Body>
                 <Right>
+
                     <Button
                         transparent
                         onPress={this.showActionSheet.bind(this)}
@@ -56,6 +57,7 @@ export default class PersonWithAddBtn extends Component {
                     </Button>
                 </Right>
             </ListItem>
+
         );
     }
 }

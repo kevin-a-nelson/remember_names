@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { ListItem, Thumbnail, Text, Left, Body, Right, Button, ActionSheet } from 'native-base';
+import { ListItem, Thumbnail, Text, Left, Body, Right, Button, ActionSheet, View, Col, Row, Grid } from 'native-base';
 import { deleteData } from '../services'
 
-import { BASE_URL } from '../globals'
+import { BASE_URL, PERSON_DETAIL } from '../globals'
 
 export default class People extends Component {
     constructor(props) {
@@ -18,6 +18,11 @@ export default class People extends Component {
         this.props.removePerson(this.props.person)
     }
 
+    async onPersonPress() {
+        const person = this.props.person
+        await this.props.setSelectedPerson(person)
+        await this.props.setActiveTab(PERSON_DETAIL)
+    }
     render() {
 
         const { person } = this.props
@@ -40,12 +45,20 @@ export default class People extends Component {
                     </Text>
                 </Body>
                 <Right>
-                    <Button
-                        transparent
-                        onPress={this.removePersonFromList.bind(this)}
-                    >
-                        <Text>Remove</Text>
-                    </Button>
+                    <Grid>
+                        <Button
+                            transparent
+                            onPress={this.onPersonPress.bind(this)}
+                        >
+                            <Text>INFO</Text>
+                        </Button>
+                        <Button
+                            transparent
+                            onPress={this.removePersonFromList.bind(this)}
+                        >
+                            <Text>Remove</Text>
+                        </Button>
+                    </Grid>
                 </Right>
             </ListItem>
         );

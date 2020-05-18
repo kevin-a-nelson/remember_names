@@ -56,6 +56,8 @@ export default class PickerTextAndItemStyleExample extends Component {
                 person={person}
                 key={person.id}
                 groupId={this.props.selectedListId}
+                setActiveTab={this.props.setActiveTab}
+                setSelectedPerson={this.props.setSelectedPerson}
             >
             </PersonWithRemoveBtn>
         ))

@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Text } from 'native-base';
 import Person from './PersonWithRemoveBtn'
 import MyListsTab from './MyListsTab'
-import { ADD_SOMEONE, MY_LISTS, EDIT_LIST, NEW_LIST, BASE_URL, SIGN_IN } from '../globals'
+import { ADD_SOMEONE, MY_LISTS, EDIT_LIST, NEW_LIST, BASE_URL, SIGN_IN, PERSON_DETAIL } from '../globals'
 import AddSomeoneTab from './AddSomeoneTab'
 import EditList from './EditList'
 import NewList from './NewList'
+import PersonDetail from './PersonDetail'
 import Signin from './Signin'
 import { AsyncStorage } from 'react-native';
 import { getData } from '../services'
@@ -20,7 +21,8 @@ export default class MyTabs extends Component {
             activeTab: ADD_SOMEONE,
             groups: [],
             selectedListId: undefined,
-            selectedList: undefined
+            selectedList: undefined,
+            selectedPerson: {}
         };
     }
 
@@ -86,6 +88,9 @@ export default class MyTabs extends Component {
         this.setState({ selectedListId })
     }
 
+    setSelectedPerson(selectedPerson) {
+        this.setState({ selectedPerson })
+    }
 
     render() {
 
@@ -116,6 +121,7 @@ export default class MyTabs extends Component {
                     setActiveTab={this.props.setActiveTab.bind(this)}
                     setSelectedListId={this.setSelectedListId.bind(this)}
                     selectedListId={this.state.selectedListId}
+                    setSelectedPerson={this.setSelectedPerson.bind(this)}
                 />
             )
 
@@ -133,6 +139,12 @@ export default class MyTabs extends Component {
                     setActiveTab={this.props.setActiveTab.bind(this)}
                     fetchGroups={this.fetchGroups.bind(this)}
                     userId={this.props.userId}
+                />
+            )
+
+            case PERSON_DETAIL: return (
+                <PersonDetail
+                    person={this.state.selectedPerson}
                 />
             )
         }

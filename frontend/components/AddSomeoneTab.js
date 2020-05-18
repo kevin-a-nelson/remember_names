@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Content, Item, Input, Text, List, Button, View, Root, Spinner } from 'native-base';
 import PersonWithAddBtn from './PersonWithAddBtn'
-
+import People from './People'
 
 export default class MyLists extends Component {
     constructor(props) {
@@ -10,9 +10,10 @@ export default class MyLists extends Component {
             search: "",
             tempSearch: "",
             searching: false,
+            filteredPeople: []
         }
     }
-    people() {
+    getNewPeople() {
 
         if (this.props.people == []) {
             return []
@@ -20,23 +21,15 @@ export default class MyLists extends Component {
 
         if (this.state.search == "") {
             return []
-
         }
+
         const filteredPeople = this.props.people.filter(person => person.title.toLowerCase().includes(this.state.search.toLowerCase()))
 
-        return filteredPeople.map(person => (
-            <PersonWithAddBtn
-                person={person}
-                key={person.id}
-                buttons={this.props.buttons}
-            >
-            </PersonWithAddBtn>
-        ))
+        this.setState({ filteredPeople })
     }
 
     onEnter() {
-        this.setState({ searching: true })
-        this.setState({ search: this.state.tempSearch })
+        this.getNewPeople()
     }
 
     render() {
@@ -47,36 +40,22 @@ export default class MyLists extends Component {
                         <View style={{ paddingBottom: 15, paddingHorizontal: 20 }}>
                             <Item regular>
                                 <Input placeholder="Find Someone By Name"
-                                    onChangeText={tempSearch => this.setState({ tempSearch })}
-                                    value={this.state.tempSearch}
+                                    onChangeText={search => this.setState({ search })}
+                                    value={this.state.search}
                                 />
                             </Item>
                             <View style={{ marginTop: 15 }}>
                                 <Button
                                     style={{ width: 85 }}
                                     primary
-                                    onPress={() => this.setState({ search: this.state.tempSearch })}>
+                                    onPress={this.onEnter.bind(this)}>
                                     <Text>Enter</Text>
                                 </Button>
                             </View>
                         </View>
-
-                        {
-                            this.state.searching ?
-                                <Spinner />
-                                :
-                                null
-                        }
-
-                        {
-
-                            this.state.searching ?
-                                <Spinner />
-                                :
-                                <List>
-                                    {this.people()}
-                                </List>
-                        }
+                        <People
+                            people={this.state.filteredPeople}
+                        />
                     </Content>
                 </Container>
             </Root>
