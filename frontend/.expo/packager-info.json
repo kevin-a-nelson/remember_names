@@ -1,10 +1,10 @@
 {
-  "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 40176,
-  "expoServerNgrokUrl": "https://sp-s8y.nelson67.frontend.exp.direct",
-  "packagerNgrokUrl": "https://packager.sp-s8y.nelson67.frontend.exp.direct",
-  "ngrokPid": 40187,
+  "devToolsPort": 19003,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }

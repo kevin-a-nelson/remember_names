@@ -55,6 +55,7 @@ export default class MyLists extends Component {
                         </View>
                         <People
                             people={this.state.filteredPeople}
+                            buttons={this.props.buttons}
                         />
                     </Content>
                 </Container>

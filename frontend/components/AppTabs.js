@@ -89,6 +89,7 @@ export default class MyTabs extends Component {
     }
 
     setSelectedPerson(selectedPerson) {
+
         this.setState({ selectedPerson })
     }
 
