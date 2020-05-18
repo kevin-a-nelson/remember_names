@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Content, Item, Input, Text, List, Button, View, Root } from 'native-base';
+import { Container, Content, Item, Input, Text, List, Button, View, Root, Spinner } from 'native-base';
 import PersonWithAddBtn from './PersonWithAddBtn'
 
 
@@ -9,6 +9,7 @@ export default class MyLists extends Component {
         this.state = {
             search: "",
             tempSearch: "",
+            searching: false,
         }
     }
     people() {
@@ -19,8 +20,8 @@ export default class MyLists extends Component {
 
         if (this.state.search == "") {
             return []
-        }
 
+        }
         const filteredPeople = this.props.people.filter(person => person.title.toLowerCase().includes(this.state.search.toLowerCase()))
 
         return filteredPeople.map(person => (
@@ -31,6 +32,11 @@ export default class MyLists extends Component {
             >
             </PersonWithAddBtn>
         ))
+    }
+
+    onEnter() {
+        this.setState({ searching: true })
+        this.setState({ search: this.state.tempSearch })
     }
 
     render() {
@@ -54,9 +60,23 @@ export default class MyLists extends Component {
                                 </Button>
                             </View>
                         </View>
-                        <List>
-                            {this.people()}
-                        </List>
+
+                        {
+                            this.state.searching ?
+                                <Spinner />
+                                :
+                                null
+                        }
+
+                        {
+
+                            this.state.searching ?
+                                <Spinner />
+                                :
+                                <List>
+                                    {this.people()}
+                                </List>
+                        }
                     </Content>
                 </Container>
             </Root>

@@ -7,7 +7,7 @@ import AddSomeoneTab from './AddSomeoneTab'
 import EditList from './EditList'
 import NewList from './NewList'
 import Signin from './Signin'
-
+import { AsyncStorage } from 'react-native';
 import { getData } from '../services'
 
 export default class MyTabs extends Component {
@@ -58,6 +58,7 @@ export default class MyTabs extends Component {
     }
 
     componentDidMount = () => {
+        AsyncStorage.setItem('userId', this.props.userId.toString())
         this.fetchPeople()
         this.fetchGroups()
     }
